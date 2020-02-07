@@ -19,10 +19,32 @@
 </div>
 
 <div align="center" >
-  <!--<img src="www.google.com/imgres?imgurl=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Fthumb%2Fc%2Fcf%2FAngular_full_color_logo.svg%2F1200px-Angular_full_color_logo.svg.png&imgrefurl=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FAngular_(web_framework)&docid=NgFEMLdWIdXlsM&tbnid=zMVT-tzIv4v9fM%3A&vet=10ahUKEwikyemx4JfnAhUXXM0KHe0oAmwQMwhjKAAwAA..i&w=1200&h=1200&itg=1&bih=754&biw=563&q=angular%20image&ved=0ahUKEwikyemx4JfnAhUXXM0KHe0oAmwQMwhjKAAwAA&iact=mrc&uact=8" alt="no internet connection">-->
-  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Angular_full_color_logo.svg/800px-Angular_full_color_logo.svg.png" alt="no internet connection">
+  <img alt="no internet connection" (click)="changeText()" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Angular_full_color_logo.svg/800px-Angular_full_color_logo.svg.png" />
 </div>
+<table class="table table-hover">
+  <td class="col-lg-4">
+    <input type="button" name="btn" class="btn btn-primary inputbtn" [disabled]="getBtnDisbaled()" (click)="btnClicked()" (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()" (mouseover)="onMouseOver()" />
+  </td>
+  <td class="col-lg-4">
+    <div>
+      <span align="middle">{{ getText() }}</span>
+    </div>
+  </td>
+  <td class="col-lg-4">
+    <div>
+      <img alt="count" name="countIcon" class="imag" src="https://cdn.iconscout.com/icon/premium/png-256-thumb/count-16-1040693.png"/>
+    </div>
+  </td>
+  <td class="col-lg-4">
+    <div align="right">
+      <i> {{count}} </i>
+    </div>
+  </td>
+  <td class="col-lg-4">
+    <div align="right">
+      <h3>1st app</h3>
+    </div>
+  </td>
+</table>
+<input type="button" class="btn btn-danger" *ngFor="let i of list" [value]="list.indexOf(i)" />
 
-<div align="right">
-  <h3>1st app</h3>
-</div>
