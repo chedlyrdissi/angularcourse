@@ -1,0 +1,28 @@
+db
+./gradlew createTestSchema -DdatabaseName=batch_new -DdatabasePlatform=sqlserver
+
+./gradlew installTestSchema -PdatabaseProperties=build.sqlserver_new.properties -PlicenseLanguage=language
+
+./gradlew updateTestSchema -PdatabaseProperties=build.sqlserver_update.properties -PlicenseLanguage=language
+
+./gradlew updateTestSchema -PdatabaseProperties=build.sqlserver_sales_default.properties -PlicenseLanguage=language
+
+./gradlew createTestSchema -DdatabaseName=batch_new
+
+./gradlew installTestSchema -PdatabaseProperties=build.oracle_new.properties -PlicenseLanguage=language
+
+./gradlew updateTestSchema -PdatabaseProperties=build.oracle_update.properties -PlicenseLanguage=language
+
+config :
+jdbc:oracle:thin:@(DESCRIPTION =
+(ADDRESS = (PROTOCOL = TCP)(HOST = ot1dvdby004p.mgmt.dv.hgn)(PORT = 1541))
+(ADDRESS = (PROTOCOL = TCP)(HOST = ot1dvdby005p.mgmt.dv.hgn)(PORT = 1541))
+(CONNECT_DATA =
+(SERVER = DEDICATED)
+(SERVICE_NAME = OT1QAOLTP820)
+)
+)
+
+to update after ts or db
+
+Version.components
