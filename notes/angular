@@ -77,3 +77,8 @@ then we call it using only referenceName
 with that whatever you put inside the component is kept
 
 
+#reference  then @ViewChild('reference', {static: true(if used in onNGInit)/false})
+same with @ContentChild(...) but used in ng-content
+these return ElementRef
+
+to make css available use encapsulation in Component
