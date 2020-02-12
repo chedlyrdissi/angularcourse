@@ -3,7 +3,8 @@ import {HeaderChoice} from '../shared/HeaderChoice';
 
 @Component({
   selector: 'app-header',
-  templateUrl: './header.component.html'
+  templateUrl: './header.component.html',
+  styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
 
@@ -24,6 +25,7 @@ export class HeaderComponent {
     } else {
       this.choice = HeaderChoice.RECIPES;
     }
+    console.log('recipesClicked');
   }
 
   shoppingListClicked() {
@@ -32,15 +34,18 @@ export class HeaderComponent {
     } else {
       this.choice = HeaderChoice.SHOPPING_LIST;
     }
+    console.log('shoppingListClicked');
   }
 
   onRecipeClick() {
     this.recipesClicked();
     this.emitChoice();
+    console.log('onRecipeClick');
   }
 
   onShoppingListClick() {
     this.shoppingListClicked();
     this.emitChoice();
+    console.log('onShoppingListClick');
   }
 }
