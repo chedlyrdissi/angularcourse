@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {HeaderChoice} from './shared/HeaderChoice';
 
 @Component({
@@ -14,13 +14,13 @@ export class AppComponent {
     this.choice = newChoice.choice;
   }
 
-  recipeHidden(): boolean {
-    console.log('recipeHidden ' + this.choice === HeaderChoice.NONE || this.choice === HeaderChoice.SHOPPING_LIST );
-    return this.choice === HeaderChoice.NONE || this.choice === HeaderChoice.SHOPPING_LIST;
+  showRecipe(): boolean {
+    // return this.choice === HeaderChoice.NONE || this.choice === HeaderChoice.SHOPPING_LIST;
+    return this.choice === HeaderChoice.RECIPES;
   }
 
-  shoppingListHidden(): boolean {
-    console.log('shoppingListHidden ' + this.choice === HeaderChoice.NONE || this.choice === HeaderChoice.RECIPES );
-    return this.choice === HeaderChoice.NONE || this.choice === HeaderChoice.RECIPES;
+  showShoppingList(): boolean {
+    // return this.choice === HeaderChoice.NONE || this.choice === HeaderChoice.RECIPES;
+    return this.choice === HeaderChoice.SHOPPING_LIST;
   }
 }

@@ -1,0 +1,12 @@
+a{
+  cursor: pointer
+}
+
+.selected{
+  background-color: lightgreen;
+  margin-left: 50px;
+}
+
+.selected:hover {
+  background-color: lightgreen;
+}

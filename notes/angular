@@ -82,3 +82,24 @@ same with @ContentChild(...) but used in ng-content
 these return ElementRef
 
 to make css available use encapsulation in Component
+
+in directive to access element use class Renderer2
+
+@HostListener('<event>') used in directives to listen to events
+@HostBinding('<property of the host>') used in directives to modify property
+	exp @HostBinding('style.backgroundColor') 
+	can be used to add or remove classes to create a menu ( class name is open)
+
+when making custom structural directives the name of the property must be the same as the name of the selector
+
+<div [ngSwitch]="condition">
+	<p *ngSwitchCase=" <case> "></p>
+	<p *ngSwitchCase=" <case> "></p>
+</div>
+
+to make menu close on any outside click
+@HostListener('document:click', ['$event']) toggleOpen(event: Event) {
+    this.isOpen = this.elRef.nativeElement.contains(event.target) ? !this.isOpen : false;
+  }
+
+when creating a service use the provider key in @Component: it takes an array and the class of the service.
