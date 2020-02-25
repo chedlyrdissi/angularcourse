@@ -103,3 +103,33 @@ to make menu close on any outside click
   }
 
 when creating a service use the provider key in @Component: it takes an array and the class of the service.
+
+the service can be inherited by child components if we don't include it in the prividers array.
+meaning if you declare a service in the parent's providers array and you don't in it's children they'll share that instance.
+PS: the service still needs to be in the constructor.
+
+hierarchy of the Service:
+app.module
+app.component
+<your component parent to child>
+<last child>
+
+to inject a service into another service the parent service needs to have metaData attached to it
+a component has metadata because it has @Component
+a directive has metadata because it has @Directive
+
+you can use @Injectable() on the receiving service
+
+to avoid having to use a chain of event emitters and property/event binding
+use event emitters in a service and subscribe to the event emitter
+
+class service{
+	event: EventEmitter<object>;
+}
+class2{
+	function whatever () {
+		this.serivice.event.subscribe(
+			( parameters ) => your code
+		); // this wraps an observable
+	}
+}
