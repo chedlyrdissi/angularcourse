@@ -2,3 +2,5 @@ tests
 gradlew :epm-web:intTest
 gradlew :epm-web:intTest --tests <fully qualified class name goes here>
 if you repeat --tests it will run each test class
+
+--refresh-dependencies

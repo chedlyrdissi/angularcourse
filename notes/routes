@@ -1,0 +1,26 @@
+routes
+
+in app module
+
+const appRoutes: Routes = [
+  { path: '' //link , component: //page_component },
+];
+
+@NgModule({
+  declarations: [
+  ],
+  imports: [
+    RouterModule.forRoot(appRoutes)
+  ],
+
+  in template 
+
+  <a routerLink="/path">text</a> 
+or [routerLink]="['/path'] // for more complex routes
+  //for the component that triggers a rerouting
+
+ <router-outlet></router-outlet> where the components defined in routing will be placed
+
+ paths:
+ 	/servers  // absolute path ==> localhost:4200/servers
+ 	servers // relative path ==> exp: localhost:4200/servers/servers
