@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Ingredient} from '../../shared/Ingredient.model';
+import {ShoppingListService} from '../shopping-list.service';
 
 @Component({
   selector: 'app-shopping-list-item',
@@ -9,16 +10,16 @@ import {Ingredient} from '../../shared/Ingredient.model';
 export class ShoppingListItemComponent implements OnInit {
 
   @Input() ingredient: Ingredient;
-  @Input() isSelected: boolean;
-  @Output() selectItem: EventEmitter<{}> = new EventEmitter<{}>();
+  isSelected: boolean;
 
-  constructor() { }
+  constructor( private slService: ShoppingListService ) { }
 
   ngOnInit(): void {
+    this.isSelected = this.slService.isSelected(this.ingredient);
   }
 
   onSelectItem() {
-    this.selectItem.emit({});
+    this.slService.selectItem.emit(this.ingredient);
   }
 }
 

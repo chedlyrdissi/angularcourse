@@ -133,3 +133,5 @@ class2{
 		); // this wraps an observable
 	}
 }
+
+to return a copy of list instead of reference use this.recipes.slice()

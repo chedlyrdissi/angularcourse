@@ -2,51 +2,43 @@ import { Component, OnInit } from '@angular/core';
 
 import { Ingredient } from '../shared/Ingredient.model';
 import {i18nGetExtension} from '@angular/compiler-cli/src/transformers/program';
+import {ShoppingListService} from './shopping-list.service';
 
 @Component({
   selector: 'app-shopping-list',
   templateUrl: './shopping-list.component.html',
-  styleUrls: ['./shopping-list.component.css']
+  styleUrls: ['./shopping-list.component.css'],
+  providers: [ShoppingListService]
 })
 export class ShoppingListComponent implements OnInit {
-  ingredients: Ingredient[] = [
-    new Ingredient('Apples', 5),
-    new Ingredient('Tomatoes', 10),
-  ];
 
+  ingredients: Ingredient[];
   selectedIngredients: Ingredient[] = [];
 
-  constructor() { }
+  constructor( private slService: ShoppingListService ) { }
 
   ngOnInit() {
+    this.ingredients = this.slService.ingredients;
+    this.selectedIngredients = this.slService.selectedIngredients;
   }
 
   addIngredient( ingredient: Ingredient ) {
-    this.ingredients.push(ingredient);
+    this.slService.addIngredient( ingredient );
   }
 
   selectIngredient( ingredient: Ingredient ) {
-    if ( this.isSelected(ingredient) ) {
-      this.selectedIngredients.splice( this.selectedIngredients.indexOf(ingredient), 1 );
-    } else {
-      this.selectedIngredients.push(ingredient);
-    }
+    this.slService.selectIngredient( ingredient );
   }
 
   clearIngredients() {
-    this.ingredients = [];
-    this.selectedIngredients = [];
+    this.slService.clearIngredients();
   }
 
   deleteSelectedIngredients() {
-    for ( const ing of this.selectedIngredients) {
-      this.ingredients.splice( this.ingredients.indexOf(ing), 1);
-    }
-    this.selectedIngredients = [];
+    this.slService.deleteSelectedIngredients();
   }
 
-  isSelected( ingredient: Ingredient): boolean {
-    return ingredient !== undefined && this.selectedIngredients.indexOf(ingredient) > -1;
+  isSelected( ingredient: Ingredient) {
+    return this.slService.isSelected(ingredient);
   }
-
 }
