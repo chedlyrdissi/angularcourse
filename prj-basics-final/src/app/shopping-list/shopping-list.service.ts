@@ -1,22 +1,16 @@
 import {Ingredient} from '../shared/Ingredient.model';
-import {EventEmitter} from '@angular/core';
 
 export class ShoppingListService {
   ingredients: Ingredient[] = [
     new Ingredient('Apples', 5),
     new Ingredient('Tomatoes', 10),
+    new Ingredient('Bananas', 20),
+    new Ingredient('Letuce', 2)
   ];
 
   selectedIngredients: Ingredient[] = [];
 
-  selectItem: EventEmitter<Ingredient> = new EventEmitter<Ingredient>();
-
   constructor() {
-    this.selectItem.subscribe(
-      (ingredient: Ingredient ) => {
-        this.selectIngredient(ingredient);
-      }
-    );
   }
 
   addIngredient( ingredient: Ingredient ) {

@@ -21,24 +21,4 @@ export class ShoppingListComponent implements OnInit {
     this.ingredients = this.slService.ingredients;
     this.selectedIngredients = this.slService.selectedIngredients;
   }
-
-  addIngredient( ingredient: Ingredient ) {
-    this.slService.addIngredient( ingredient );
-  }
-
-  selectIngredient( ingredient: Ingredient ) {
-    this.slService.selectIngredient( ingredient );
-  }
-
-  clearIngredients() {
-    this.slService.clearIngredients();
-  }
-
-  deleteSelectedIngredients() {
-    this.slService.deleteSelectedIngredients();
-  }
-
-  isSelected( ingredient: Ingredient) {
-    return this.slService.isSelected(ingredient);
-  }
 }

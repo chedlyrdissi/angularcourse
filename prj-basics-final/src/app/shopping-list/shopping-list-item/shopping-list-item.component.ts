@@ -10,16 +10,19 @@ import {ShoppingListService} from '../shopping-list.service';
 export class ShoppingListItemComponent implements OnInit {
 
   @Input() ingredient: Ingredient;
-  isSelected: boolean;
 
-  constructor( private slService: ShoppingListService ) { }
+  constructor( private slService: ShoppingListService ) {
+  }
 
   ngOnInit(): void {
-    this.isSelected = this.slService.isSelected(this.ingredient);
   }
 
   onSelectItem() {
-    this.slService.selectItem.emit(this.ingredient);
+    this.slService.selectIngredient(this.ingredient);
+  }
+
+  getIsSelected(): boolean {
+    return this.slService.isSelected(this.ingredient);
   }
 }
 
