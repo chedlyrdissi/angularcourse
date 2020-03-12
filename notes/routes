@@ -4,6 +4,12 @@ in app module
 
 const appRoutes: Routes = [
   { path: '' //link , component: //page_component },
+  { path: '' //link , component: //page_component, children: [
+	{ path: '' //link , component: //page_component }, //don't forget to add router outlet
+  	{ path: '' //link , component: //page_component },
+  ] },
+    { path: '', redirectTo: '' },
+    { path: '**' //wild card catches all errors in link, component: }
 ];
 
 @NgModule({
@@ -45,3 +51,5 @@ this.route.params.subscribe( () => {} ) will be called everytime the params chan
 
 you can implement onDestroy and unsubscribe
 
+Querry Params
+	use querryParamsHandling: 'preserve' / 'merge' //keep old and add new
