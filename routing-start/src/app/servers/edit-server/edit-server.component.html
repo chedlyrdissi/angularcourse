@@ -1,5 +1,5 @@
-<h1 *ngIf="!allowEdit; else ElseBlock"> you're not allowed to edit the contents </h1>
-<ng-template #ElseBlock>
+<h1 *ngIf="!allowEdit"> you're not allowed to edit the contents </h1>
+<ng-template [ngIf]="allowEdit">
   <div class="form-group">
     <label for="name">Server Name</label>
     <input

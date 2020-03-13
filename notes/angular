@@ -135,3 +135,5 @@ class2{
 }
 
 to return a copy of list instead of reference use this.recipes.slice()
+
+setTimeout( func, time ) calls func after time
