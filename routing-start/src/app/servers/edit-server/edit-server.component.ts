@@ -3,8 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { ServersService } from '../servers.service';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {Server} from '../Server.model';
-import {CanComponentDeactivate} from './Can-deactivate-guard.service';
 import {Observable} from 'rxjs/Observable';
+import {CanComponentDeactivate} from './CanComponentDeactivate.interface';
 
 @Component({
   selector: 'app-edit-server',
@@ -13,29 +13,28 @@ import {Observable} from 'rxjs/Observable';
 })
 export class EditServerComponent implements OnInit, CanComponentDeactivate {
 
-  constructor(private serversService: ServersService,
-              private activatedRoute: ActivatedRoute,
-              private router: Router ) {
-    this.canDeactivate = () => {
-      if ( !this.allowEdit ) {
-        return true;
-      }
-      if ((this.serverName !== this.server.name || this.serverStatus !== this.server.status) && this.changesSaved ) {
-        return confirm( 'do you really want to leave' );
-      } else {
-        return true;
-      }
-    };
-  }
   server: Server;
   serverName = '';
   serverStatus = '';
   allowEdit = false;
   changesSaved = false;
 
-  canDeactivate: () => (Observable<boolean> | Promise<boolean> | boolean);
+  canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
+    if ( !this.allowEdit ) {
+      return true;
+    }
+    if ((this.serverName !== this.server.name || this.serverStatus !== this.server.status) && this.changesSaved ) {
+      return confirm( 'do you really want to leave' );
+    } else {
+      return true;
+    }
+  }
 
-  ngOnInit() {
+  constructor(private serversService: ServersService,
+              private activatedRoute: ActivatedRoute,
+              private router: Router ) {}
+
+    ngOnInit() {
     this.activatedRoute.queryParams.subscribe(
       ( params: Params ) => {
         this.allowEdit = params['allowEdit'] === '1';

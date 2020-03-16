@@ -18,12 +18,17 @@ export class ServerComponent implements OnInit {
               private activatedRoute: ActivatedRoute) {}
 
   ngOnInit() {
-    this.server = this.serversService.getServer( +this.activatedRoute.snapshot.params['id'] );
-    this.activatedRoute.params.subscribe(
+    this.activatedRoute.data.subscribe(
       ( params: Params ) => {
-        this.server = this.serversService.getServer( +params['id'] );
+        this.server = params['server'];
       }
     );
+    // this.server = this.serversService.getServer( +this.activatedRoute.snapshot.params['id'] );
+    // this.activatedRoute.params.subscribe(
+    //   ( params: Params ) => {
+    //     this.server = this.serversService.getServer( +params['id'] );
+    //   }
+    // );
   }
 
   onEdit() {
