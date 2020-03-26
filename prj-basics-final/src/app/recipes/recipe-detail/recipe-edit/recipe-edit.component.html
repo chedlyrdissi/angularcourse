@@ -1,0 +1,23 @@
+<p>recipe-edit works!</p>
+<div class="row">
+  <div class="col-xs-12">
+    <img [src]="recipe.imagePath" alt="{{recipe.name}}" class="img-responsive">
+    <input type="text" [ngModel]="recipe.imagePath"/>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    <input type="text" [ngModel]="recipe.name"/>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    <input type="text" [ngModel]="recipe.description"/>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    Ingredients:
+    <app-ingredient *ngFor="let ingredient of recipe.ingredients" [ingredient]="ingredient"></app-ingredient>
+  </div>
+</div>

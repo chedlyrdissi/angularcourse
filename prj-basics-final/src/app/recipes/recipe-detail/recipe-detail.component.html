@@ -17,9 +17,9 @@
         Manage Recipe <span class="caret"></span>
       </button>
       <ul class="dropdown-menu">
-        <li><a href="#">To Shopping List</a></li>
-        <li><a href="#">Edit Recipe</a></li>
-        <li><a href="#">Delete Recipe</a></li>
+        <li><a>To Shopping List</a></li>
+        <li><a [routerLink]="['edit']">Edit Recipe</a></li>
+        <li><a>Delete Recipe</a></li>
       </ul>
     </div>
   </div>
@@ -31,6 +31,7 @@
 </div>
 <div class="row">
   <div class="col-xs-12">
-    Ingredients
+    Ingredients:
+    <app-ingredient *ngFor="let ingredient of recipe.ingredients" [ingredient]="ingredient"></app-ingredient>
   </div>
 </div>

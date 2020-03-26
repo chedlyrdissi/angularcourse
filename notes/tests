@@ -6,4 +6,6 @@ if you repeat --tests it will run each test class
 
 --refresh-dependencies
 
-gradlew publishToMavenLocal
+gradlew publishToMavenLocal // publish the plugins
+
+npm run sanity:quick  // testing ts

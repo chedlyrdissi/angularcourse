@@ -10,7 +10,7 @@ import {RecipeService} from '../../recipe.service';
 export class RecipeItemComponent implements OnInit {
 
   @Input() recipe: Recipe;
-  constructor( private recipeService: RecipeService ) { }
+  constructor() { }
 
   ngOnInit() {
   }
@@ -25,9 +25,5 @@ export class RecipeItemComponent implements OnInit {
 
   getRecipeImage() {
     return ( this.recipe === undefined ) ? '' : this.recipe.imagePath ;
-  }
-
-  onRecipeItemClick(): void {
-    this.recipeService.recipeSelected.emit(this.recipe);
   }
 }
