@@ -1,0 +1,27 @@
+JSP standard tag library
+
+	bundle of tags that accomplish core func of a web app
+	comes in a jar, has to be added to <u>build path</u>
+
+has modules:
+	core module:
+		iteration, conditional statement, display data
+	formatting module
+		format values (date, weight...), localization (logging in one place ...), internationalization (make app location everywhere)
+	xml module:
+		manipulating xml
+	sql module
+		querrying db with sql
+
+	core module: <c:name of tag/>
+	xml module: <x:name of tag/>
+	sql module: <sql: name of tag/>
+	fmt module: <fmt: name of tag/>
+Note: to use the modules, you need to include them independently.
+	JSTL is aligned to EL so you can use EL in them
+
+syntax for including JSTL:
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/xml" prefix="x"%>

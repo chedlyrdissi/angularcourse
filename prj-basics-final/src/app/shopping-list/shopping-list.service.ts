@@ -1,6 +1,10 @@
 import {Ingredient} from '../shared/Ingredient.model';
+import {Subject} from 'rxjs';
 
 export class ShoppingListService {
+
+  subject: Subject<Ingredient[]>;
+
   ingredients: Ingredient[] = [
     new Ingredient('Apples', 5),
     new Ingredient('Tomatoes', 10),

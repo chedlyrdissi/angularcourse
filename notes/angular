@@ -76,7 +76,6 @@ then we call it using only referenceName
 
 with that whatever you put inside the component is kept
 
-
 #reference  then @ViewChild('reference', {static: true(if used in onNGInit)/false})
 same with @ContentChild(...) but used in ng-content
 these return ElementRef
@@ -103,6 +102,7 @@ to make menu close on any outside click
   }
 
 when creating a service use the provider key in @Component: it takes an array and the class of the service.
+{ provide: abstract, useClass: concrete } use this if you declare an abstract class and you want to pass a concrete class
 
 the service can be inherited by child components if we don't include it in the prividers array.
 meaning if you declare a service in the parent's providers array and you don't in it's children they'll share that instance.
@@ -119,6 +119,8 @@ a component has metadata because it has @Component
 a directive has metadata because it has @Directive
 
 you can use @Injectable() on the receiving service
+
+@Injectabl({providedIn: 'root'}) same as adding it to providers in root app module
 
 to avoid having to use a chain of event emitters and property/event binding
 use event emitters in a service and subscribe to the event emitter
@@ -137,3 +139,41 @@ class2{
 to return a copy of list instead of reference use this.recipes.slice()
 
 setTimeout( func, time ) calls func after time
+
+observables:
+
+interval(duration) return an observable
+to create one use: Observable.create( observer => { something happening 
+	observer.next(something); // emits an event
+	observer.error( new Error('message') );// throws an error
+} );
+
+observable.subscrible( data => {data we got}, error => {error handler}, () => {complete handler} );
+
+error cancels observable and does not complete it
+
+every observable has a pipe method
+obs.pipe( //here you put operators like map or filter).subscribe or something
+
+subject is a kind of observable that acts like an eventemitter
+
+observable ==> observer (passive, you use next inside the observable)
+subject ==> observer (active, you use next outside it)
+
+Useful Resources:
+
+Official Docs: https://rxjs-dev.firebaseapp.com/
+RxJS Series: https://academind.com/learn/javascript/understanding-rxjs/
+Updating to RxJS 6: https://academind.com/learn/javascript/rxjs-6-what-changed/
+
+angular gives a js obj for a form { values: { key: value, ... }, valid: true/false }
+
+2 approaches to froms:
+template-driven: set up form in template html code and angular will make it easy to start quickly (will prepare the structure).
+reactive: you create the html, the ts code and manually do the work
+
+to set a module alias add it to paths in tsconfig.jason
+"paths": {
+      "@angular/*": ["node_modules/@angular/*"],
+      }
+

@@ -26,3 +26,6 @@ jdbc:oracle:thin:@(DESCRIPTION =
 to update after ts or db
 
 Version.components
+
+
+select seq_liquibase.nextval from dual; // to get a changelog id lock

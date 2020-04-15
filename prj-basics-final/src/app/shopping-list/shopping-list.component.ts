@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Ingredient } from '../shared/Ingredient.model';
-import {i18nGetExtension} from '@angular/compiler-cli/src/transformers/program';
 import {ShoppingListService} from './shopping-list.service';
 
 @Component({
