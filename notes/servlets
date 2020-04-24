@@ -1,0 +1,229 @@
+netstat -ab // see trafic
+netstat -ano|findstr "PID :<port number>" // filter to that port
+taskkill /pid <pid number> /f // kill process at that port
+
+
+deploy outside ide
+export war
+under tomcat/webapp you put the war files to deploy
+navigate to startup.bat in tomcat\bin and launch it in cmd
+
+HTTP request:
+	GET: get info from server
+		get info from server
+		send data visible in url ==> insecure request
+		data limited: 8kb
+		idempotent: wouldn't change the server side: just get info
+		href always calls doGet
+
+	POST: process info on server
+		process information
+		modify data into a data store
+
+	PUT: uploads a resource on server
+	DELETE: deletes a resource on server
+	HEAD: get but return only headers
+	OPTIONS: helps trace what HTTP methods work on server
+
+
+to set the routes:
+	in web.xml:
+		<servlet>
+			<servlet-name>name</servlet-name>
+			<servlet-class>fully qualified name</servlet-class>
+		</servlet>
+		<servlet-mapping>	
+			<servlet-name></servlet-name>
+			<url-pattern>url</url-pattern>
+		</servlet-mapping>
+
+	in the servlet class
+		add on top of the class declaration:
+			@WebServlet("URL pattern")
+
+
+/servletParrern?key=value
+to get params use req.getParams("key")
+
+requestdispatcher (get from req) can forward you to a jsp : avoid having the name in the url, can also incluse other changes
+
+ServletConfig: one config per servlet
+	in servlet class: getServletConfig()
+	web.xml inside the <servlet>
+		<init-params>
+			<param-name>key</param-name>
+			<param-value>url/value</param-value>
+		</init-params>
+
+	in servlet class
+		@webServlet(
+			urlPattern = "pattern",
+			initParams = @webInitParam( name= "key", value="value/url")
+		)
+
+ServletContext: passes data throughout all the project
+	in web.xml in app directly
+		<context-param>
+			<param-name>name</param-name>
+			<param-value>url</param-value>
+		</context-param>
+
+Servlets have hook methods init (establish connections)/destroy (close connections) and service (don't touch)
+
+JSP:
+	html elements + java code ==> make page dynamic
+	executed on server and rendered to client
+	support scripting
+	scripter: <% java code %> // if for ...
+	expression: <$= %> eval expression and print 
+	declaration: <%!  %> declare variables and methods
+
+	there are implicit objects on jsp:	
+		request: same one servlet passed
+
+you can set attribute in servlet
+	req.setAttribute(key,value)
+	then get it in jsp: request.getAttribute(key)
+
+directives: <%@ %>
+	import classes
+	configure error pages
+	sels up sessions for JSP
+	set character encoding for page
+@page
+	every attribute used with page directive can be used only once ( except import)
+	isThreadSafe = false : one at the time
+	errorPage: if anything goes wrong direct user
+
+@include : used to include resource into the jsp
+	<%@include file="" %>
+
+JSP implicit objects: predefined
+	out: JSPWriter // print output to jsp
+	request: HTTPServletRequest
+	response: HTTPServletResponse
+	session: HTTPSession
+	config: ServletConfig
+	application: ServletContext
+	exception: Exception // debug errors on error pages
+	pageContext: reference to all other implicit objects
+	page: current jsp page
+
+HTTP limitations: stateless, doesn't conserve the state
+
+you can use EJB session bean api for session handling
+
+session identifies by id
+	server generates id and sends it to client as part of the response
+	client sends id to server so that server recognizes that it's the same client
+	id can be extchanged:
+		coockies: small pieces of info stored on browser.
+			sent to client as part if the response
+			request.getSession() returns httpsession sets up the process of creating cookies and everything
+
+		url rewriting:
+			url;jsessionid=13e1a51vav65a3131e5ca135
+			we need to encode the url
+			url rewriting pitches in when cookies are disabled.
+	it's possible to set the timeout in jave and web.xml
+		req.getSession().setMaxTimeout(timeout in seconds)
+		<session-config>
+			<session-timeout>timeout in minutes</session-timeout>
+		</session-config>
+Filter: interface
+	in dofilter make sure you call filterchain.doFilter(req,resp) to complete the chainflow
+		what you write before the call is preprocessing
+		what you write after the call is postprocessing
+
+	in web.xml
+		<filter>
+			<filter-name>filtername</filter-name>
+			<filter-class>fully qualified name</filter-class>
+		<filter>
+		<filter-mapping>
+			<filter-name>filtername</filter-name>
+			<url-pattern>/*</url-pattern> // means always runs, for every pattern
+			<url-pattern></url-pattern>
+		<filter-mapping>
+	in class
+		@webFilter("url pattern")
+		@webFilter(urlPatterns="")
+		@webFilter(urlPatterns="", initParams=@web...)
+
+Events:
+	context level:
+		deploy
+		undeploy
+	session level
+		login
+		logout
+	request level
+		start request process
+	add/remove attributes in all levels
+	session migration (go from 1 machine to another)
+	bind/unbind obj to session
+
+Listeners: classes that respond to events
+	ServletContextListener: captures deployment/undeployment
+	ServletContextAttributeListener
+	HTTPSessionListener: session created/destroyed
+	HTTPSessionAttributeListener
+	ServletRequestListener:
+	HTTPSessionBindingListener
+	HttpSessionActivationListener: migration
+	set:
+		web.xml
+			<listener>
+				<listener-class>fully qualified name</listener-class>
+			</listener>
+		in class 
+			@webListener()
+
+try to:
+	use filter
+	set db connection in init listeners
+	JSP is just view
+
+Standard action:
+<jsp:useBean  />: helps instantiate a bean on jsp or get a bean
+<jsp:forward />: forward control to another resource in the context
+<jsp:include />: includes another resource in current resource
+<jsp:getProperty /> fetch and display a value from javaBean property
+<jsp:setProperty /> sets a value to a javaBean property
+
+	in servlet: req.addAttribute("key",value);
+	<jsp:useBean id="key" scope="request" type="fullyqualified name" />
+	<jsp:getProperty property="bean attribute, instance var name" name="key"/>
+
+<jsp:include page="page.jsp"></jsp:include>
+
+difference between include directive and standard action:
+	directive: include resource and main resource get combined then translated into servlet file
+	standard action: both will be translated seperately then at run time they'll be combined and rendered
+
+you can pass params to the include:	
+	<jsp:include >
+		<jsp:param value="" name=""/>
+	<jsp:include />
+web.xml : deployment descriptor
+
+Expression language in JSP:
+	allows to write simple expression on JSP
+	${obj.property}
+	${obj["property"]}
+		both work
+	types:
+		immediate: ${} evaluated immediately when JSP runs
+		deffered: #{} evaluated at a later point in time
+	exp:
+		${user.age}
+		${requestScope.noOfItems}
+		${sessionScope.username}
+		${a div b}, ${a/b}
+		${a mod b}, ${a % b}
+		== same as eq, != same as ne, > gt, < lt, le <=
+
+
+
+
+note: autocomplete ctr + space
