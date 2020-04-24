@@ -1,0 +1,27 @@
+CI/CD
+
+push - requirements - sanity - build - deploy staging - tests staging - deploy production - test productions
+
+CI: work local - push - code integrated - test
+continious delivery: build - test - release software with every new change
+continious deployment: app created - tested - deployed without human interaction.
+
+CI/CD 
+
+self hosted, your hardware, you are responsible for it
+
+	pros: flexible, data control
+	cons: difficult to install and maintain, bounded scale, getting started
+
+SaaS vendor provides the tool and you access it
+	pros: easy to start, free options, automatic trigger
+	cons: cost, security
+
+Cloud service providers: offer the tools
+	pros: easy to integrate with other tools id and access management, unbound scale
+	cons: vendor lock-in
+
+Code Repo:
+	pros: repo and CI/CD in one tool, free options, custom docker containers
+	cons: high cost at scale
+
